@@ -1,5 +1,7 @@
 package org.lessons.java.shop;
 
+import java.util.Random;
+
 public class Prodotto {
 	
 	private int code;
@@ -9,8 +11,8 @@ public class Prodotto {
 	private double iva;
 	
 	// Constructor
-	public Prodotto(int code, String name, String description, double price, double iva) {
-		setCode(code);
+	public Prodotto(String name, String description, double price, double iva) {
+		generateRandomCode();
 		setName(name);
 		setDescription(description);
 		setPrice(price);
@@ -74,10 +76,20 @@ public class Prodotto {
 		return strIva + '%';
 	}
 	
+	public void generateRandomCode() {
+		final int minCode = 0;
+		final int maxCode = Integer.MAX_VALUE;
+		
+		Random rnd = new Random();
+		int randomCode = rnd.nextInt(maxCode - minCode) + minCode;
+		
+		setCode(randomCode);
+	}
+	
 	// Override
 	@Override
 	public String toString() {
-		return "PRODOTTO\n" +
+		return "PRODOTTO: " + getFullName() + '\n' +
 				"Code: " + getCode() + '\n' +
 				"Name: " + getName() + '\n' +
 				"Description: " + getDescription() + '\n' +
